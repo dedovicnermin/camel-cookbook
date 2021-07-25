@@ -1,0 +1,8 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+
+    <route id="greetings">
+        <from uri="direct:greetings" />
+        <bean ref="processor-component" method="greeting" />
+    </route>
+
+</routes>

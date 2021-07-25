@@ -1,0 +1,7 @@
+<rests xmlns="http://camel.apache.org/schema/spring" >
+    <rest>
+        <get uri="greetings" produces="application/json">
+            <to uri="direct:greetings" />
+        </get>
+    </rest>
+</rests>
