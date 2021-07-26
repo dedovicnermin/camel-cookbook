@@ -4,4 +4,16 @@
             <to uri="direct:greetings" />
         </get>
     </rest>
+
+    <!--  orders component  -->
+    <rest>
+        <get uri="getOrders" produces="application/json" >
+            <to uri="direct:getOrders" />
+        </get>
+
+        <post uri="addOrder" consumes="application/json" type="tech.nermindedovic.restdsl.dto.Order" bindingMode="json" outType="tech.nermindedovic.restdsl.dto.Order">
+            <to uri="direct:addOrder" />
+        </post>
+
+    </rest>
 </rests>
