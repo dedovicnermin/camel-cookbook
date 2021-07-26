@@ -5,4 +5,15 @@
         <bean ref="processor-component" method="greeting" />
     </route>
 
+    <!--  orders component  -->
+    <route id="getOrdersRoute">
+        <from uri="direct:getOrders" />
+        <bean ref="order-processor" method="getOrders" />
+    </route>
+
+    <route id="addOrderRoute" >
+        <from uri="direct:addOrder" />
+        <bean ref="order-processor" method="process"  />
+    </route>
+
 </routes>
