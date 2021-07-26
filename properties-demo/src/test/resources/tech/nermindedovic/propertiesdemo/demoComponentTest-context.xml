@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <bean class="tech.nermindedovic.propertiesdemo.DemoComponent" id="demo-component" autowire="byName"/>
+
+
+    <camelContext  xmlns="http://camel.apache.org/schema/spring">
+        <propertyPlaceholder id="properties" location="classpath:placeholder.properties" />
+        <route>
+            <from uri="{{direct.input}}"/>
+            <bean ref="demo-component" method="process" />
+            <to uri="{{direct.output}}"/>
+        </route>
+
+        <route>
+            <from uri="{{inline.processor.in}}" />
+            <transform>
+                <simple>${body} {{inline.processor.body}}</simple>
+            </transform>
+            <to uri="{{inline.processor.out}}" />
+        </route>
+    </camelContext>
+
+</beans>
