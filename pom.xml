@@ -30,29 +30,33 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <version>3.7.3</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-spring-junit5</artifactId>
+            <version>3.7.3</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jackson</artifactId>
+            <version>3.7.3</version>
+        </dependency>
+
+
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-core</artifactId>
-                <version>3.7.3</version>
-            </dependency>
 
-
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-test-spring-junit5</artifactId>
-                <version>3.7.3</version>
-            </dependency>
-
-
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-jackson</artifactId>
-                <version>3.7.3</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.apache.camel</groupId>
