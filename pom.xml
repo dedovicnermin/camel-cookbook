@@ -21,6 +21,7 @@
     <modules>
         <module>rest-dsl</module>
         <module>properties-demo</module>
+        <module>wiretap-demo</module>
     </modules>
 
 
