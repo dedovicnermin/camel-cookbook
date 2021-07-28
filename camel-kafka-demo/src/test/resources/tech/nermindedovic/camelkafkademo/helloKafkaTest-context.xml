@@ -5,11 +5,12 @@
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
 
+    <bean class="tech.nermindedovic.camelkafkademo.DemoProcessor" id="demo-processor" />
 
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <route>
-            <from uri="kafka:helloCamel?brokers=localhost:29092"/>
+            <from uri="kafka:toCamelTopic?brokers=localhost:29092"/>
             <log message="Received from kafka : ${body}" />
             <to uri="mock:toCamelRoute" />
         </route>
@@ -18,6 +19,14 @@
             <from uri="direct:start"/>
             <log message="Sending message to kafka topic : ${body}" />
             <to uri="kafka:helloKafka?brokers=localhost:29092" />
+        </route>
+
+        <route>
+            <from uri="kafka:helloCamel?brokers=localhost:29092" />
+            <log message="REQUEST: ${body}" />
+            <bean ref="demo-processor" method="process" />
+            <log message="RESPONSE: ${body}" />
+            <to uri="kafka:helloKafka?brokers==localhost:29092" />
         </route>
 
     </camelContext>
