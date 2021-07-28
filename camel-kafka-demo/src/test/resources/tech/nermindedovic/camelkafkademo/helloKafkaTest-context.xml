@@ -9,18 +9,21 @@
 
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <!--    consume from topic. Route to internal endpoint.    -->
         <route>
             <from uri="kafka:toCamelTopic?brokers=localhost:29092"/>
             <log message="Received from kafka : ${body}" />
             <to uri="mock:toCamelRoute" />
         </route>
 
+        <!--    consume from internal. produce to topic.    -->
         <route>
             <from uri="direct:start"/>
             <log message="Sending message to kafka topic : ${body}" />
             <to uri="kafka:helloKafka?brokers=localhost:29092" />
         </route>
 
+        <!--    consume from topic. route to bean. produce to topic.    -->
         <route>
             <from uri="kafka:helloCamel?brokers=localhost:29092" />
             <log message="REQUEST: ${body}" />
