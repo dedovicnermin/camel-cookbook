@@ -18,7 +18,6 @@ import org.springframework.test.context.ContextConfiguration;
 
 import java.util.HashMap;
 
-
 @SpringBootTest(properties = "spring.kafka.bootstrap-servers=${spring.embedded.kafka.brokers}")
 @ContextConfiguration
 @EmbeddedKafka(partitions = 1, topics = {HelloKafkaTest.consumingTopic, HelloKafkaTest.producingTopic}, ports = 29092, zkConnectionTimeout = 2000)
@@ -27,9 +26,6 @@ class HelloKafkaTest {
 
     static final String consumingTopic = "helloCamel";
     static final String producingTopic = "helloKafka";
-
-
-
 
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -41,11 +37,8 @@ class HelloKafkaTest {
     protected MockEndpoint mockEndpoint;
 
 
-
-
     @Test
     void camelWillConsumeFromKafka_andRouteToMockEndpoint() throws InterruptedException {
-
         String kafkaInputBody = "Hello Camel, i am kafka!", kafkaInputKey = "testKey";
         mockEndpoint.expectedBodiesReceived(kafkaInputBody);
 
@@ -53,16 +46,8 @@ class HelloKafkaTest {
         Producer<String, String> producer = new DefaultKafkaProducerFactory<>(producerConfig, new StringSerializer(), new StringSerializer()).createProducer();
         producer.send(new ProducerRecord<>(consumingTopic, kafkaInputKey, kafkaInputBody ));
         producer.flush();
-        producer.flush();
-
 
         mockEndpoint.assertIsSatisfied(5000);
-
-
-
-
-
-
     }
 
 
