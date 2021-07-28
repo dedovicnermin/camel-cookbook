@@ -14,6 +14,12 @@
             <to uri="mock:toCamelRoute" />
         </route>
 
+        <route>
+            <from uri="direct:start"/>
+            <log message="Sending message to kafka topic : ${body}" />
+            <to uri="kafka:helloKafka?brokers=localhost:29092" />
+        </route>
+
     </camelContext>
 
 
