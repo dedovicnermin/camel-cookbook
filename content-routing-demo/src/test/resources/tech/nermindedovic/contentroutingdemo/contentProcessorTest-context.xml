@@ -1,0 +1,51 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:spring="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+
+    <bean class="tech.nermindedovic.contentroutingdemo.ContentProcessor" id="content-processor"/>
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+
+        <route>
+            <from uri="direct:start" />
+            <choice>
+                <when>
+                    <simple>${body} contains 'xml'</simple>
+                    <to uri="mock:xml" />
+                </when>
+                <otherwise>
+                    <to uri="mock:plain" />
+                </otherwise>
+            </choice>
+        </route>
+
+
+        <route>
+            <from uri="direct:begin" />
+            <bean ref="content-processor" method="process" />
+            <choice>
+                <when>
+                    <simple>${header.destination} == 1</simple>
+                    <to uri="mock:uno" />
+                </when>
+                <when>
+                    <simple>${header.destination} == 2</simple>
+                    <to uri="mock:dos" />
+                </when>
+                <when>
+                    <simple> ${header.destination} == 3</simple>
+                    <to uri="mock:tres" />
+                </when>
+                <otherwise>
+                    <to uri="mock:error" />
+                </otherwise>
+            </choice>
+        </route>
+
+
+    </camelContext>
+
+</beans>

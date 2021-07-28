@@ -22,6 +22,7 @@
         <module>rest-dsl</module>
         <module>properties-demo</module>
         <module>wiretap-demo</module>
+        <module>content-routing-demo</module>
     </modules>
 
 
