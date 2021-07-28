@@ -23,6 +23,8 @@
         <module>properties-demo</module>
         <module>wiretap-demo</module>
         <module>content-routing-demo</module>
+        <module>multicast-demo</module>
+        <module>camel-kafka-demo</module>
     </modules>
 
 
@@ -59,6 +61,11 @@
     <dependencyManagement>
         <dependencies>
 
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-kafka</artifactId>
+                <version>3.7.3</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.apache.camel</groupId>
