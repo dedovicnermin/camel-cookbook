@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:spring="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+
+    <bean class="tech.nermindedovic.multicastdemo.DemoComponent" id="demo-component"/>
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+
+        <route>
+            <from uri="direct:start" />
+            <multicast>
+                <to uri="mock:firstService" />
+                <to uri="mock:secondService" />
+                <to uri="mock:thirdService" />
+            </multicast>
+            <bean ref="demo-component" method="process"/>
+            <to uri="mock:end" />
+        </route>
+
+    </camelContext>
+
+
+
+</beans>
