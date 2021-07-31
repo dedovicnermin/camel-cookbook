@@ -1,0 +1,33 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:spring="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+
+    <bean class="tech.nermindedovic.camelkafkademo.OrderProcessor" id="order-processor" />
+
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring" >
+        <dataFormats>
+            <json id="orderConverter" library="Jackson" unmarshalTypeName="tech.nermindedovic.camelkafkademo.Order" />
+        </dataFormats>
+
+        <route>
+            <from uri="kafka:orders.in?brokers=localhost:29092" />
+            <unmarshal><custom ref="orderConverter" /></unmarshal>
+
+            <log message="Message received from Kafka: ${body}" />
+            <log message="      on the topic ${headers[kafka.TOPIC]}" />
+            <log message="      on the partition ${headers[kafka.PARTITION]}" />
+            <log message="      with the offset ${headers[kafka.OFFSET]}" />
+            <log message="      with the key ${headers[kafka.KEY]}" />
+            <log message="      kafka message specific headers : ${headers[kafka.HEADERS]}" />
+
+            <bean ref="order-processor" method="process" />
+
+            <marshal><custom ref="orderConverter" /></marshal>
+            <to uri="kafka:orders.out?brokers=localhost:29092" />
+        </route>
+    </camelContext>
+</beans>
