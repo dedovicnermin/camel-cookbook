@@ -26,6 +26,7 @@
         <module>multicast-demo</module>
         <module>camel-kafka-demo</module>
         <module>recipient-list-demo</module>
+        <module>reqresp-routing-demo</module>
     </modules>
 
 
