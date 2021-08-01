@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:spring="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <bean class="tech.nermindedovic.recipientlistdemo.DemoComponent" id="demo-component" />
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring" >
+        <route>
+            <from uri="direct:start" />
+            <setHeader name="endpointsToBeTriggered">
+                <method ref="demo-component" method="process" />
+            </setHeader>
+            <log message="BODY: ${body} \nHeaders: ${headers}" />
+            <recipientList>
+                <header>endpointsToBeTriggered</header>
+            </recipientList>
+        </route>
+    </camelContext>
+
+</beans>

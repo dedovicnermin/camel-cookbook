@@ -25,6 +25,7 @@
         <module>content-routing-demo</module>
         <module>multicast-demo</module>
         <module>camel-kafka-demo</module>
+        <module>recipient-list-demo</module>
     </modules>
 
 
