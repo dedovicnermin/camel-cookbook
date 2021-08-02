@@ -8,10 +8,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>recipient-list-demo</artifactId>
+    <artifactId>reqresp-routing-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>recipient-list-demo</name>
-    <description>recipient-list-demo</description>
+    <name>reqresp-routing-demo</name>
+    <description>reqresp-routing-demo</description>
 
     <properties>
         <java.version>1.8</java.version>
